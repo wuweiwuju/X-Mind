@@ -223,4 +223,68 @@ int main()
 	return 0;
 }*/
 //8.atoi
+/*#include<stdio.h>
+#include<assert.h>
+int Atoi(const char* str)
+{
+	assert(str);
+	const char* p = str;
+	if (*p == '-' || *p == '+')
+		++p;
+
+	int ret = 0;
+	while (*p != '\0') {
+		if (*p < '0' || *p > '9')
+			break;
+
+		ret = (*p - '0')  + ret*10;
+		++p;
+	}
+
+	return *str == '-' ? -ret : ret;
+}
+int main()
+{
+	const char* str = "+123456";
+	int ret = Atoi(str);
+	printf("%d\n", ret);
+	return 0;
+}*/
 //9.itoa
+#include<stdio.h>
+#include<assert.h>
+char* Itoa(int x, char* str)
+{
+	if (x < 0) {
+		str[0] = '-';
+		x = -x;
+	}	
+	int i = 0;
+	if (str[0] == '-')
+		i = 1;
+	int n = x;
+	int count = 0;
+	int flag = 0;
+	while (n)
+	{
+		n /= 10;
+		++count;
+		++flag;
+	}
+	while (x)
+	{
+		str[count + i - 1] = x % 10 + '0';
+		x /= 10;
+		--count;
+	}
+	str[flag + i] = '\0';
+	return str;
+}
+int main()
+{
+	int n = -123456;
+	char str[10];
+	Itoa(n, str);
+	printf("%s\n", str);
+	return 0;
+}
